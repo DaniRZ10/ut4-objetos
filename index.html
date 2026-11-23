@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UT4 · Objetos definidos por el usuario</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        #botones button,
+        #botones a {
+            margin: 0.25rem;
+            padding: 0.5rem 1rem;
+        }
+
+        #salida {
+            background: #f4f4f4;
+            padding: 1rem;
+            min-height: 6rem;
+            white-space: pre-wrap;
+        }
+    </style>
+    <!-- defer: los scripts se ejecutan en orden cuando el HTML ya está cargado -->
+    <script src="js/salida.js" defer></script>
+    <script src="js/ejercicio1.js" defer></script>
+    <script src="js/ejercicio2.js" defer></script>
+    <script src="js/ejercicio3.js" defer></script>
+    <script src="js/ejercicio4.js" defer></script>
+    <script src="js/ejercicio5.js" defer></script>
+    <script src="js/ejercicio6.js" defer></script>
+    <script src="js/ejercicio7.js" defer></script>
+    <script src="js/ejercicio8.js" defer></script>
+    <script src="js/main.js" defer></script>
+</head>
+
+<body>
+    <h1>UT4 · Objetos definidos por el usuario</h1>
+    <p>Pulsa un ejercicio para ejecutarlo. El resultado aparece abajo y también en la consola (F12).</p>
+
+    <nav id="botones">
+        <button type="button" data-ejercicio="1">Ejercicio 1</button>
+        <button type="button" data-ejercicio="2">Ejercicio 2</button>
+        <button type="button" data-ejercicio="3">Ejercicio 3</button>
+        <button type="button" data-ejercicio="4">Ejercicio 4</button>
+        <button type="button" data-ejercicio="5">Ejercicio 5</button>
+        <button type="button" data-ejercicio="6">Ejercicio 6</button>
+        <button type="button" data-ejercicio="7">Ejercicio 7</button>
+        <button type="button" data-ejercicio="8">Ejercicio 8</button>
+        <a href="ejercicio10/saludo.html">Ejercicio 10 (abre otra página)</a>
+    </nav>
+
+    <h2 id="titulo-salida">Salida</h2>
+    <pre id="salida"></pre>
+</body>
+
+</html>
