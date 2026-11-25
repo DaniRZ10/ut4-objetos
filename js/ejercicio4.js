@@ -22,6 +22,4 @@ function ejercicio4() {
 
   mostrar('coche1:', coche1);
   mostrar('coche2:', coche2);
-  mostrar('Modelo de coche2:', coche2.model);
-  mostrar('¿coche1 es un Car? (instanceof):', coche1 instanceof Car);
 }
