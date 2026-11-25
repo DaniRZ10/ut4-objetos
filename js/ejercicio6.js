@@ -17,12 +17,6 @@ function ejercicio6() {
     }
   };
 
-  // Al convertir el objeto en texto se usa nuestro toString()
-  mostrar(String(cuentaBancaria));      // conversión explícita
-  mostrar(`${cuentaBancaria}`);         // dentro de una plantilla de texto
-  mostrar('' + cuentaBancaria);         // concatenando con un texto
-
-  // Si cambia el saldo, el texto se actualiza porque toString() usa this.saldo
-  cuentaBancaria.saldo = 1250;
+  // Al convertir el objeto en texto para imprimirlo, JavaScript usa nuestro toString()
   mostrar(String(cuentaBancaria));
 }
