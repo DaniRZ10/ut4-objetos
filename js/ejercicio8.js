@@ -10,7 +10,7 @@ function ejercicio8() {
 
     /**
      * @param {string} propietario Nombre del propietario (propiedad pública).
-     * @param {number} codigoInicial Código secreto inicial.
+     * @param {string} codigoInicial Código secreto inicial, de 4 dígitos.
      */
     constructor(propietario, codigoInicial) {
       this.propietario = propietario;
@@ -19,7 +19,7 @@ function ejercicio8() {
 
     /**
      * Devuelve el código secreto.
-     * @returns {number} El código actual.
+     * @returns {string} El código actual.
      */
     verCodigo() {
       return this.#codigo;
@@ -27,12 +27,20 @@ function ejercicio8() {
 
     /**
      * Cambia el código solo si el nuevo tiene exactamente 4 dígitos.
-     * @param {number} nuevoCodigo Código que se quiere poner.
+     * El código se trata como texto y no como número para que un PIN
+     * como '0021' conserve sus ceros a la izquierda.
+     * @param {string} nuevoCodigo Código que se quiere poner.
      * @returns {boolean} true si se ha cambiado; false si no era válido.
      */
     cambiarCodigo(nuevoCodigo) {
-      const texto = String(nuevoCodigo);
-      if (texto.length === 4 && !isNaN(nuevoCodigo)) {
+      // Expresión regular /^\d{4}$/:
+      //   ^    → el texto empieza aquí (no puede haber nada delante)
+      //   \d   → un dígito del 0 al 9
+      //   {4}  → exactamente 4 veces lo anterior
+      //   $    → el texto termina aquí (no puede haber nada detrás)
+      // test() devuelve true si el texto cumple ese patrón.
+      // Así se rechazan, por ejemplo, '123', '12345', '-123' o '12.5'.
+      if (/^\d{4}$/.test(nuevoCodigo)) {
         this.#codigo = nuevoCodigo;
         return true;
       }
@@ -40,25 +48,18 @@ function ejercicio8() {
     }
   }
 
-  // Crear la caja y probar sus métodos
-  const miCaja = new CajaFuerte('Ana', 1234);
-  mostrar('Propietario:', miCaja.propietario);
+  // Crear la caja con propietario "Ana" y código inicial 1234
+  const miCaja = new CajaFuerte('Ana', '1234');
   mostrar('verCodigo():', miCaja.verCodigo());
 
-  mostrar('cambiarCodigo(5678):', miCaja.cambiarCodigo(5678));
+  // Cambiar el código a 5678
+  mostrar('cambiarCodigo(\'5678\'):', miCaja.cambiarCodigo('5678'));
   mostrar('verCodigo() tras el cambio:', miCaja.verCodigo());
 
-  mostrar('cambiarCodigo(99) (no tiene 4 dígitos):', miCaja.cambiarCodigo(99));
-  mostrar('verCodigo() (no ha cambiado):', miCaja.verCodigo());
-
-  // Intentar acceder al código desde fuera de la clase
-  mostrar('--- Acceso directo desde fuera de la clase ---');
-  mostrar('miCaja.codigo:', miCaja.codigo);   // undefined: no existe una propiedad pública "codigo"
-  mostrar('Object.keys(miCaja):', Object.keys(miCaja)); // #codigo no aparece
-
-  // Escribir miCaja.#codigo aquí sería un error de sintaxis y el archivo no se ejecutaría.
-  // Para demostrarlo sin romper la página, se crea ese código con new Function
-  // dentro de un try...catch y se captura el error.
+  // Intentar acceder directamente a #codigo desde fuera de la clase.
+  // Escribir miCaja.#codigo aquí sería un error de sintaxis y el archivo
+  // entero no llegaría a ejecutarse. Para demostrarlo sin romper la página,
+  // ese código se crea con new Function dentro de un try...catch y se captura el error.
   try {
     const leerCodigo = new Function('caja', 'return caja.#codigo;');
     leerCodigo(miCaja);
